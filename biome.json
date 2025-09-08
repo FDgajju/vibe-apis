@@ -1,0 +1,110 @@
+
+    {
+      "$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
+      "files": {
+        "include": ["src/**/*"]
+      },
+      "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 2,
+        "lineEnding": "lf",
+        "lineWidth": 80,
+        "attributePosition": "auto",
+        "ignore": []
+      },
+      "organizeImports": { "enabled": true },
+      "linter": {
+        "enabled": true,
+        "rules": {
+          "recommended": false,
+          "complexity": {
+            "noBannedTypes": "error",
+            "noUselessTypeConstraint": "error"
+          },
+          "correctness": {
+            "noPrecisionLoss": "error",
+            "noUnusedVariables": "error",
+            "noConstAssign": "error",
+            "noInnerDeclarations": "error",
+            "noInvalidUseBeforeDeclaration": "error",
+            "noUndeclaredVariables": "error",
+            "noUnusedImports": "warn"
+          },
+          "style": {
+            "noNamespace": "error",
+            "useAsConstAssertion": "error",
+            "useBlockStatements": "off",
+            "noVar": "error",
+            "noShoutyConstants": "warn"
+          },
+          "suspicious": {
+            "noExplicitAny": "warn",
+            "noExtraNonNullAssertion": "error",
+            "noMisleadingInstantiator": "error",
+            "noUnsafeDeclarationMerging": "error"
+          }
+        },
+        "ignore": [".eslintrc.js"]
+      },
+      "javascript": {
+        "formatter": {
+          "jsxQuoteStyle": "double",
+          "quoteProperties": "asNeeded",
+          "trailingComma": "all",
+          "semicolons": "always",
+          "arrowParentheses": "always",
+          "bracketSpacing": true,
+          "bracketSameLine": false,
+          "quoteStyle": "single",
+          "attributePosition": "auto"
+        },
+        "parser": {
+          "unsafeParameterDecoratorsEnabled": true
+        }
+      },
+      "overrides": [
+        {
+          "include": ["*.ts", "*.tsx", "*.mts", "*.cts"],
+          "linter": {
+            "rules": {
+              "correctness": {
+                "noGlobalObjectCalls": "off",
+                "noInvalidConstructorSuper": "off",
+                "noNewSymbol": "off",
+                "noSetterReturn": "off",
+                "noUndeclaredVariables": "warn",
+                "noConstAssign": "warn",
+                "noUnreachable": "off",
+                "noUnreachableSuper": "warn",
+                "noInnerDeclarations": "error",
+                "noInvalidUseBeforeDeclaration": "error",
+                "noUnusedVariables": "warn",
+                "noUnusedImports": "warn"
+              },
+              "style": {
+                "noArguments": "error",
+                "noVar": "error",
+                "useConst": "error",
+                "noUnusedTemplateLiteral": "warn",
+                "useImportType": "error",
+                "useTemplate": "warn"
+              },
+              "suspicious": {
+                "noDuplicateClassMembers": "off",
+                "noDuplicateObjectKeys": "error",
+                "noDuplicateParameters": "warn",
+                "noFunctionAssign": "warn",
+                "noImportAssign": "warn",
+                "noRedeclare": "error",
+                "noUnsafeNegation": "off",
+                "useGetterReturn": "off"
+              }
+            }
+          }
+        }
+      ]
+    }
+    
+    
