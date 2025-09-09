@@ -3,6 +3,7 @@ import { Reaction } from "./model";
 
 export const reactionCount = async (filter: AnyType) => {
   try {
+    console.log(filter);
     const data = await Reaction.aggregate([
       { $match: filter },
       { $group: { _id: "$reaction", count: { $sum: 1 } } },

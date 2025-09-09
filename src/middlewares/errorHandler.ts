@@ -6,7 +6,9 @@ import type { ZodError } from "zod";
 
 //
 const handleCastErrorDB = (err: ApplicationError) => {
-  const message = `Invalid ${err.details.path}: ${err.details.value}.`;
+
+  console.log(err)
+  const message = `Invalid ${err.details?.path}: ${err.details.value}.`;
   return new AppError(message, 400);
 };
 

@@ -26,6 +26,9 @@ export const signUp = async (
   data.profileImage = "68bdb6403582572ab10c3e7e";
 
   const user = await User.create(data);
+
+  await user.populate([{ path: "profileImage", select: "name key url type" }]);
+
   if (!user) throw new AppError("Signup failed", HTTP_STATUS.BAD_REQUEST);
 
   await Setting.create({ user: user._id });
@@ -62,14 +65,21 @@ export const signIn = async (
     $or: [{ email: data.user }, { userName: data.user }],
   }).lean();
 
-  if (!user) throw new AppError("User Not Found", HTTP_STATUS.NOT_FOUND);
+  if (!user)
+    throw new AppError(
+      "Invalid credentials, please try again.",
+      HTTP_STATUS.NOT_FOUND
+    );
 
   const validPassword = await compareHashAndData(
     data.password as string,
     user.password as string
   );
   if (!validPassword)
-    throw new AppError("Password does not match!", HTTP_STATUS.UNAUTHORIZED);
+    throw new AppError(
+      "Invalid credentials, please try again.",
+      HTTP_STATUS.UNAUTHORIZED
+    );
 
   const token = genJwtToken({ _id: user._id });
 

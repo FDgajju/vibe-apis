@@ -4,6 +4,7 @@ import { AppError, filterData } from "../../utils";
 import type { ReqExtra } from "../../types/globalTypes";
 import type { NextFunction, Response } from "express";
 import { HTTP_STATUS } from "../../constants";
+import { isValidObjectId } from "mongoose";
 
 export const updateSelf = async (
   req: ReqExtra,
@@ -12,12 +13,10 @@ export const updateSelf = async (
 ) => {
   const { body, user } = req;
 
-  // 1) Create error if user POSTs password data
   if (body.password || body.passwordConfirm) {
     return next(new AppError("This route is not for password updates.", 400));
   }
 
-  // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filterData.addFields(body, [
     "profileImage",
     "fullName",
@@ -46,4 +45,9 @@ export const updateSelf = async (
 };
 
 export const getAllUsers = getAll(User);
-export const getUser = getOne(User);
+
+export const getUser = (req: ReqExtra, res: Response, next: NextFunction) => {
+  if (!isValidObjectId(req.params.id)) throw new AppError("User not found", HTTP_STATUS.NOT_FOUND);
+
+  return getOne(User, [{ path: "profileImage" }])(req, res, next);
+};

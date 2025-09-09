@@ -1,6 +1,6 @@
 
 import type { NextFunction, Request, Response } from 'express';
-import type { Schema } from 'mongoose';
+import type mongoose from 'mongoose';
 
 export type HandlerFUnction = (
   req: Request | ReqExtra,
@@ -24,4 +24,4 @@ export type ApplicationError = any;
 export type AnyType = any
 
 
-export type MongoObjectId = Schema.Types.ObjectId;
+export type MongoObjectId = mongoose.Types.ObjectId;

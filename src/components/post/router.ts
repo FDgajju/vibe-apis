@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getAllPosts,
+  getAllPostsAggregation,
   getPost,
   updatePost,
 } from "./controller";
@@ -15,7 +16,11 @@ import { updatePostSchema } from "./validator";
 const postRouter = Router();
 
 postRouter.post("/", catchHandler(authenticate), catchHandler(createPost));
-postRouter.get("/", getAllPosts);
+postRouter.get(
+  "/",
+  catchHandler(authenticate),
+  catchHandler(getAllPostsAggregation)
+);
 
 postRouter.get("/:id", getPost);
 postRouter.patch("/:id", inputValidation(updatePostSchema), updatePost);

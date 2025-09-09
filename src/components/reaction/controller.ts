@@ -1,9 +1,10 @@
 import { Reaction } from "./model";
 import { getAll, getOne } from "../handlerFactory";
-import type { ReqExtra } from "../../types/globalTypes";
+import type { MongoObjectId, ReqExtra } from "../../types/globalTypes";
 import type { NextFunction, Response } from "express";
 import { HTTP_STATUS } from "../../constants";
 import { reactionCount } from "./service";
+import mongoose from "mongoose";
 
 export const createReaction = async (
   req: ReqExtra,
@@ -11,40 +12,55 @@ export const createReaction = async (
   _next: NextFunction
 ) => {
   const { user, body } = req;
-
   const { post, comment, reaction } = body;
 
-  const filter = {
+  if ((!post && !comment) || (post && comment)) {
+    return res.status(HTTP_STATUS.BAD_REQUEST).send({
+      status: false,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
+      error: "A reaction must belong to exactly one post or one comment.",
+    });
+  }
+
+  const query: { by: string; post?: string; comment?: string } = {
     by: user._id,
-    $or: [{ post }, { comment }],
   };
+  const targetData: {
+    post?: MongoObjectId;
+    comment?: MongoObjectId;
+  } = {};
 
-  let checkReaction = await Reaction.findOne(filter);
+  if (post) {
+    query.post = post;
+    targetData.post = new mongoose.Types.ObjectId(post);
+  } else {
+    query.comment = comment;
+    targetData.comment = new mongoose.Types.ObjectId(comment);
+  }
 
-  if (checkReaction) {
-    if (checkReaction.reaction === reaction) await checkReaction.deleteOne();
-    //  for now i am handling only heart reaction from ui side
-    else {
-      checkReaction.reaction = reaction;
-      await checkReaction.save();
+  const existingReaction = await Reaction.findOne(query);
+
+  console.log(existingReaction);
+  if (existingReaction) {
+    if (existingReaction.reaction === reaction) {
+      await existingReaction.deleteOne();
+    } else {
+      existingReaction.reaction = reaction;
+      await existingReaction.save();
     }
   } else {
-    checkReaction = await Reaction.create({
-      post,
-      comment,
+    await Reaction.create({
+      ...targetData,
       reaction,
       by: user._id,
     });
   }
 
-  const newCount = await reactionCount({
-    by: user._id,
-    $or: [{ post }, { comment }],
-  });
+  const newCount = await reactionCount(targetData);
 
   return res.status(HTTP_STATUS.OK).send({
     status: true,
-    data: { comment, post, reactions: newCount.data },
+    data: { ...targetData, reactions: newCount.data },
     statusCode: HTTP_STATUS.OK,
     error: null,
   });

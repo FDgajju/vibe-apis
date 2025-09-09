@@ -1,9 +1,10 @@
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Response } from "express";
 import { AppError } from "../utils";
 import * as fileTypeModule from "file-type";
+import type { ReqExtra } from "../types/globalTypes";
 
 export const fileCheck = async (
-  req: Request,
+  req: ReqExtra,
   _res: Response,
   next: NextFunction
 ) => {
@@ -12,6 +13,7 @@ export const fileCheck = async (
   const allowFileTypes = [
     "jpg",
     "jpeg",
+    "webp",
     "png",
     "gif",
     "mp4",

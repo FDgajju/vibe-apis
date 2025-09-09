@@ -4,6 +4,9 @@ import { CITY_NAMES } from "../../constants/randomCityName";
 
 const postSchema = new Schema(
   {
+    title: {
+      type: String,
+    },
     content: {
       type: String,
     },

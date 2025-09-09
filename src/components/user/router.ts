@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getAllUsers, getUser, updateSelf } from "./controller";
 import { inputValidation } from "../../middlewares";
-import { userSchema } from "./validator";
+import { updateUserSchema, userSchema } from "./validator";
 import { catchHandler } from "../../utils";
 import { authenticate } from "../../middlewares/auth";
 
@@ -13,7 +13,7 @@ userRouter.get("/:id", getUser);
 userRouter.patch(
   "/update",
   catchHandler(authenticate),
-  inputValidation(userSchema),
+  inputValidation(updateUserSchema),
   catchHandler(updateSelf)
 );
 

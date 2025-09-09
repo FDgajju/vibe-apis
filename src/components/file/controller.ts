@@ -100,6 +100,7 @@ export const createFile = async (
   const doc = await File.create({
     name: originalname,
     key: (uploadResp.data as AnyType).filename,
+    type: file.mimetype,
     url: (uploadResp.data as AnyType).url,
     uploadedBy: user?._id,
   });
