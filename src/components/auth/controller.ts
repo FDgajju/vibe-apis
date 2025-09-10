@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { AppError, filterData } from "../../utils";
 import { User } from "../user/model";
-import { HTTP_STATUS } from "../../constants";
+import { DEFAULT_PROFILE_IMAGE, HTTP_STATUS } from "../../constants";
 import { genJwtToken } from "../../lib/jwt";
 import { compareHashAndData } from "../../lib";
 import Setting from "../setting/model";
@@ -23,7 +23,7 @@ export const signUp = async (
     "passwordConfirm",
   ]);
 
-  data.profileImage = "68bdb6403582572ab10c3e7e";
+  data.profileImage = DEFAULT_PROFILE_IMAGE;
 
   const user = await User.create(data);
 

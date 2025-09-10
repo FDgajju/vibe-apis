@@ -35,3 +35,5 @@ export const CORS_ALLOWED_ORIGINS =
 
 // auth
 export const JWT_SECRET = process.env.JWT_SECRET || "super-secret";
+
+export const DEFAULT_PROFILE_IMAGE = process.env.DEFAULT_PROFILE_IMAGE as string;
