@@ -5,6 +5,7 @@ import type { AnyType } from "../types/globalTypes";
 
 export const inputValidation = (schema: ZodObject<AnyType>) => {
   return async (req: Request, _res: Response, next: NextFunction) => {
+
     try {
       await schema.parseAsync({
         body: req.body,

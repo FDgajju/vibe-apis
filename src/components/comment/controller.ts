@@ -37,7 +37,7 @@ export const createComment = async (
 };
 
 export const getAllComments = getAll(Comment, [
-  { path: "by", select: "fullName profileImage" },
+  { path: "by", select: "fullName profileImage", populate: [{ path: "profileImage", select: "url type" }], },
   {
     path: "children_comments",
     select: "comment by",

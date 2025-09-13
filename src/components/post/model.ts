@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { PopulateOptions, Schema, model } from "mongoose";
 import { MODEL_NAMES } from "../../constants";
 import { CITY_NAMES } from "../../constants/randomCityName";
 
@@ -46,5 +46,43 @@ postSchema.virtual("reactions", {
   foreignField: "post",
   justOne: false,
 });
+
+postSchema.virtual("reaction_count", {
+  ref: MODEL_NAMES.REACTION,
+  localField: "_id",
+  foreignField: "post",
+  count: true,
+});
+
+postSchema.virtual("comment_count", {
+  ref: MODEL_NAMES.REACTION,
+  localField: "_id",
+  foreignField: "post",
+  count: true,
+});
+
+postSchema.statics.findByIdWithUserReaction = async function (
+  postId: string,
+  userId: string,
+  PopulateOptions: PopulateOptions
+) {
+  const post = await this.findById(postId).populate(PopulateOptions).lean();
+
+  if (!post) {
+    return null;
+  }
+
+  if (userId) {
+    const reaction = await mongoose
+      .model(MODEL_NAMES.REACTION)
+      .findOne({ post: postId, by: userId });
+
+    post.isReacted = !!reaction;
+  } else {
+    post.isReacted = false;
+  }
+
+  return post;
+};
 
 export const Post = model(MODEL_NAMES.POST, postSchema);

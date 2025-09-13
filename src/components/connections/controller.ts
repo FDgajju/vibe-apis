@@ -27,7 +27,7 @@ export const createConnection = async (
 
   const count = await Connection.countDocuments(filter);
 
-  return res.status(HTTP_STATUS.OK).send({
+  return res.status(HTTP_STATUS.CREATED).send({
     status: true,
     statusCode: HTTP_STATUS.OK,
     error: null,

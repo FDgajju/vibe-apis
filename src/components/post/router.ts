@@ -22,7 +22,7 @@ postRouter.get(
   catchHandler(getAllPostsAggregation)
 );
 
-postRouter.get("/:id", getPost);
+postRouter.get("/:id", catchHandler(authenticate), catchHandler(getPost));
 postRouter.patch("/:id", inputValidation(updatePostSchema), updatePost);
 postRouter.delete("/:id", deletePost);
 

@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "68c0b6a6a22b6e23a8a109d9",
+    "by": "68bd71a5bd46dbac90df2b6a",
+    "post": "60d21b4667d0d8992e610c8b",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109da",
+    "by": "68bdc05f2a88d6e122f917e1",
+    "post": "60d21b4667d0d8992e610c8c",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109db",
+    "by": "68bdc0fca1286438cb8877d6",
+    "post": "60d21b4667d0d8992e610c8d",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109dc",
+    "by": "68bf6075dad596a6f6d92711",
+    "post": "68c0b6a6a22b6e23a8a109cf",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109dd",
+    "by": "68bf664a5541c5b10958ebbd",
+    "post": "68c0b6a6a22b6e23a8a109d0",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109de",
+    "by": "68bf691432941cbe843f8956",
+    "post": "68c0b6a6a22b6e23a8a109d1",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109df",
+    "by": "68bf6c6a4af6c682fc2fb571",
+    "post": "68c0b6a6a22b6e23a8a109d2",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109e0",
+    "by": "68bf6d160aafca7686cf2f5c",
+    "post": "68c0b6a6a22b6e23a8a109d3",
+    "reaction": "like"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109e1",
+    "by": "60d0fe4f5311236168a109ca",
+    "post": "68c0b6a6a22b6e23a8a109cf",
+    "reaction": "heart"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109e2",
+    "by": "60d0fe4f5311236168a109cb",
+    "post": "68c0b6a6a22b6e23a8a109d0",
+    "reaction": "wow"
+  }
+]

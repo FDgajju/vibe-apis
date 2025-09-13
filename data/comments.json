@@ -1,0 +1,51 @@
+
+[
+  {
+    "_id": "60d21b4667d0d8992e610c8e",
+    "comment": "This is a comment on the first post.",
+    "by": "60d0fe4f5311236168a109cb",
+    "post": "60d21b4667d0d8992e610c8b"
+  },
+  {
+    "_id": "60d21b4667d0d8992e610c8f",
+    "comment": "This is a reply to the first comment.",
+    "by": "60d0fe4f5311236168a109ca",
+    "parentComment": "60d21b4667d0d8992e610c8e"
+  },
+  {
+    "_id": "60d21b4667d0d8992e610c90",
+    "comment": "This is a comment on the second post.",
+    "by": "60d0fe4f5311236168a109ca",
+    "post": "60d21b4667d0d8992e610c8c"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109d4",
+    "comment": "Great post!",
+    "by": "68bf691432941cbe843f8956",
+    "post": "68c0b6a6a22b6e23a8a109cf"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109d5",
+    "comment": "Nice one!",
+    "by": "68bf6c6a4af6c682fc2fb571",
+    "post": "68c0b6a6a22b6e23a8a109d0"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109d6",
+    "comment": "I agree!",
+    "by": "68bf6d160aafca7686cf2f5c",
+    "post": "68c0b6a6a22b6e23a8a109d1"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109d7",
+    "comment": "Well said!",
+    "by": "60d0fe4f5311236168a109ca",
+    "post": "68c0b6a6a22b6e23a8a109d2"
+  },
+  {
+    "_id": "68c0b6a6a22b6e23a8a109d8",
+    "comment": "This is a great discussion.",
+    "by": "60d0fe4f5311236168a109cb",
+    "post": "68c0b6a6a22b6e23a8a109d3"
+  }
+]

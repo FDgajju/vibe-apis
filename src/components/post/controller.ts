@@ -48,26 +48,42 @@ export const createPost = async (
   });
 };
 
-export const getPost = getOne(Post, [
-  { path: "media", select: { name: 1, url: 1, type: 1 } },
-  {
-    path: "author",
-    select: { fullName: 1, profileImage: 1 },
-    populate: [{ path: "profileImage", select: { name: 1, url: 1 } }],
-  },
-  // {
-  //   path: "comments",
-  //   populate: [
-  //     { path: "by", select: "fullName profileImage" },
-  //     // { path: "parentComment", select: "comment by" },
-  //     {
-  //       path: "children_comments",
-  //       select: "comment by",
-  //       populate: [{ path: "by", select: "fullName profileImage" }],
-  //     },
-  //   ],
-  // },
-]);
+export const getPost = async (
+  req: ReqExtra,
+  res: Response,
+  next: NextFunction
+) => {
+  const { user, params } = req;
+  const populateOptions = [
+    { path: "media", select: { name: 1, url: 1, type: 1 } },
+    {
+      path: "author",
+      select: { fullName: 1, profileImage: 1 },
+      populate: [{ path: "profileImage", select: { name: 1, url: 1 } }],
+    },
+    { path: "reaction_count" },
+    { path: "comment_count" },
+  ];
+
+  const doc = await (Post as any).findByIdWithUserReaction(
+    params.id,
+    user._id,
+    populateOptions
+  );
+
+  if (!doc) {
+    return next(
+      new AppError("No document found with that ID", HTTP_STATUS.NOT_FOUND)
+    );
+  }
+
+  res.status(200).json({
+    status: true,
+    message: "Operation successful",
+    error: null,
+    data: doc,
+  });
+};
 
 export const getAllPosts = getAll(Post, [
   { path: "media", select: { name: 1, url: 1, type: 1 } },
@@ -150,7 +166,7 @@ export const getAllPostsAggregation = async (
             },
           },
         },
-        likes: {
+        reaction_count: {
           $size: {
             $filter: {
               input: "$allReactions",
@@ -161,7 +177,7 @@ export const getAllPostsAggregation = async (
             },
           },
         },
-        comments: { $size: "$allComments" },
+        comment_count: { $size: "$allComments" },
       },
     },
 
@@ -276,7 +292,7 @@ export const getAllPostsAggregation = async (
       limit,
       currentPage: page,
       totalPages: Math.ceil(totalCount / limit),
-      result: totalCount,
+      total: totalCount,
     },
     data: result.paginatedResults,
   });

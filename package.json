@@ -10,7 +10,8 @@
             "dev": "nodemon --exec tsx src/server.ts",
             "format": "biome format ./src --write",
             "lint": "biome lint ./src",
-            "lint:apply": "biome check --apply ./src"
+            "lint:apply": "biome check --apply ./src",
+            "seed": "tsx src/seed.ts"
       },
       "dependencies": {
             "@aws-sdk/client-s3": "^3.883.0",

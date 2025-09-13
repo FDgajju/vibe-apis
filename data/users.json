@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullName": "John Doe",
+    "userName": "johndoe",
+    "email": "john.doe@example.com",
+    "password": "12345678",
+    "passwordConfirm": "12345678",
+    "profileImage": "68bf64c4dad596a6fdc92715",
+    "bio": "Lover of coffee and code. Building things one line at a time."
+  },
+  {
+    "_id": "60d0fe4f5311236168a109cb",
+    "fullName": "Jane Smith",
+    "userName": "janesmith",
+    "email": "jane.smith@example.com",
+    "password": "12345678",
+    "passwordConfirm": "12345678",
+    "profileImage": "68bf55c887e35d1bc68f1748",
+    "bio": "Passionate about design and user experience. Making the web a more beautiful place."
+  }
+]

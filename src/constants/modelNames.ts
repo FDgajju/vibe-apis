@@ -6,5 +6,5 @@ export const MODEL_NAMES = {
   CONNECTION: "Connection",
   FILE: "File",
   SETTING: "Setting",
-  FOLLOW: "Follow",
+  FOLLOW: "Connection",
 };

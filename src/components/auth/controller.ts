@@ -23,6 +23,8 @@ export const signUp = async (
     "passwordConfirm",
   ]);
 
+  console.log(data)
+
   data.profileImage = DEFAULT_PROFILE_IMAGE;
 
   const user = await User.create(data);
@@ -63,7 +65,9 @@ export const signIn = async (
   // Find user by email or phone
   const user = await User.findOne({
     $or: [{ email: data.user }, { userName: data.user }],
-  }).lean();
+  })
+    .populate([{ path: "profileImage", select: "name key url type" }] )
+    .lean();
 
   if (!user)
     throw new AppError(

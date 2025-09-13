@@ -7,6 +7,7 @@ import commentRouter from "./comment/router";
 import fileRouter from "./file/router";
 import authRouter from "./auth/router";
 import reactionRouter from "./reaction/router";
+import userConnectionRouter from "./connections/router";
 
 export const injectRouters = (app: Application) => {
   app.use(apiLogger);
@@ -29,6 +30,7 @@ export const injectRouters = (app: Application) => {
   app.use("/api/post", postRouter);
   app.use("/api/comment", commentRouter);
   app.use("/api/reaction", reactionRouter);
+  app.use("/api/connection", userConnectionRouter);
 
   // if router not exists
   app.all("*", (req: Request, res: Response, _next: NextFunction) => {
