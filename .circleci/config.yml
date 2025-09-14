@@ -29,14 +29,10 @@ commands:
           mkdir -p ~/.ssh
           touch ~/.ssh/config
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
-          scp -i fingerprints 'vibe-api.tar.gz' admin@35.154.24.229:/home/admin/
+          scp -i fingerprints 'vibe-api.tar.gz' admin@35.154.24.229:/home/admin/archives
           echo "copied vibe-api.tar.gz"
-          ssh -i fingerprints admin@35.154.24.229 'ls && mkdir -p data/services/vibe-api && tar -xvzf vibe-api.tar.gz -C data/services/vibe-api/ && rm vibe-api.tar.gz'
-          echo "create vibe-api dir and untar"
-          ssh -i fingerprints admin@35.154.24.229 'sh data/scripts/stop.sh 4180'
-          echo "stop already running process"
-          ssh -tt -i fingerprints admin@35.154.24.229 'cd data/services/vibe-api && forever start server.js'
-          echo "start new serve process"
+          ssh -i fingerprints admin@35.154.24.229 'sh data/services/scripts/deploy.sh'
+          echo "deployed!"
 
 executors:
   default:
