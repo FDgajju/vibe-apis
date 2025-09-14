@@ -14,6 +14,7 @@ export const inputValidation = (schema: ZodObject<AnyType>) => {
       });
       next();
     } catch (error) {
+      console.log(error)
       return next(new AppError(error, 400));
     }
   };

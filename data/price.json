@@ -1,0 +1,219 @@
+[
+  {
+    "city": "Mumbai",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Mumbai",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Delhi",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Delhi",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Raipur",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Raipur",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Jaipur",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Jaipur",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Noida",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Noida",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Chennai",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Chennai",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Visakhapatnam",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Visakhapatnam",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Indore",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Indore",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Thane",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Thane",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Bhopal",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Bhopal",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Patna",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Patna",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Vadodara",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Vadodara",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Ghaziabad",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Ghaziabad",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Ludhiana",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Ludhiana",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Agra",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Agra",
+    "priceOf": "VIEWS",
+    "amount": 0.005,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  },
+  {
+    "city": "Nashik",
+    "priceOf": "REACTIONS",
+    "amount": 0.01,
+    "createdAt": "2025-09-15T12:00:00.000000Z",
+    "updatedAt": "2025-09-15T12:00:00.000000Z"
+  }
+]

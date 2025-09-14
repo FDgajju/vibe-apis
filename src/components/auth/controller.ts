@@ -5,6 +5,7 @@ import { DEFAULT_PROFILE_IMAGE, HTTP_STATUS } from "../../constants";
 import { genJwtToken } from "../../lib/jwt";
 import { compareHashAndData } from "../../lib";
 import Setting from "../setting/model";
+import { USER_ROLES } from "../../constants/constant";
 
 // sign up
 export const signUp = async (
@@ -26,6 +27,7 @@ export const signUp = async (
   console.log(data)
 
   data.profileImage = DEFAULT_PROFILE_IMAGE;
+  data.role = USER_ROLES.USER
 
   const user = await User.create(data);
 
@@ -56,13 +58,13 @@ export const signIn = async (
 ) => {
   const { body } = req;
 
-  // Allow sign in with either email+password or just phone
+  // Allow sign in with either email+password or just username
   const data = filterData.addFields(body, ["user", "password"]) as {
     user?: string;
     password?: string;
   };
 
-  // Find user by email or phone
+  // Find user by email or username
   const user = await User.findOne({
     $or: [{ email: data.user }, { userName: data.user }],
   })

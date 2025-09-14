@@ -7,4 +7,5 @@ export const MODEL_NAMES = {
   FILE: "File",
   SETTING: "Setting",
   FOLLOW: "Connection",
+  PRICE: "Price",
 };

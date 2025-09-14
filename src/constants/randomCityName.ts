@@ -1,1 +1,18 @@
-export const CITY_NAMES = ["Mumbai", "Delhi", "Raipur", "Jaipur", "Noida", "Chennai"];
+export const CITY_NAMES = [
+  "Mumbai",
+  "Delhi",
+  "Raipur",
+  "Jaipur",
+  "Noida",
+  "Chennai",
+  "Visakhapatnam",
+  "Indore",
+  "Thane",
+  "Bhopal",
+  "Patna",
+  "Vadodara",
+  "Ghaziabad",
+  "Ludhiana",
+  "Agra",
+  "Nashik",
+];

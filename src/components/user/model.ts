@@ -1,18 +1,27 @@
-import mongoose, { PopulateOptions, Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { MODEL_NAMES } from "../../constants";
 import type { MongoObjectId } from "../../types/globalTypes";
 import { hashString } from "../../lib";
-import { userSchema } from "./validator";
+import { USER_ROLES } from "../../constants/constant";
 
 export type UserModelT = {
   fullName: string;
   userName: string;
   email: string;
+  mobile: string;
   password: string;
   passwordConfirm?: string;
+  role?: UserRoles;
   bio?: string | null;
   profileImage?: string | MongoObjectId;
 };
+
+export enum UserRoles {
+  ADMIN = "ADMIN",
+  MANAGER = "MANAGER",
+  ACCOUNTANT = "ACCOUNTANT",
+  USER = "USER",
+}
 
 export interface UserT
   extends Omit<UserModelT, "password" | "passwordConfirm"> {}
@@ -33,6 +42,17 @@ const UserSchema = new Schema<UserModelT>(
       unique: [true, "The email already registered "],
       required: [true, "username is required"],
     },
+
+    mobile: {
+      type: String,
+    },
+
+    role: {
+      type: String,
+      enum: Object.values(USER_ROLES),
+      default: USER_ROLES.USER,
+    },
+
     password: {
       type: String,
       required: [true, "password is required"],

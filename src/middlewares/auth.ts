@@ -5,6 +5,7 @@ import { AppError } from "../utils";
 
 import { User } from "../components/user/model.js";
 import { verifyJwt } from "../lib/jwt.js";
+import type { USER_ROLES } from "../constants/constant.js";
 
 export interface JwtPayload {
   _id: string;
@@ -42,4 +43,30 @@ export const authenticate = async (
   } catch (error) {
     next(error);
   }
+};
+
+export const authorization = (
+  ...allowedRoles: (typeof USER_ROLES)[keyof typeof USER_ROLES][]
+) => {
+  return (req: ReqExtra, _res: Response, next: NextFunction) => {
+    const { user } = req;
+
+    if (!user) {
+      return next(
+        new AppError( 
+          "UNAUTHENTICATED. Please log in to get access.",
+          HTTP_STATUS.UNAUTHORIZED
+        )
+      );
+    }
+
+    if (allowedRoles.includes(user.role)) next();
+    else
+      return next(
+        new AppError(
+          "UNAUTHORIZED ACCESS! You are not allowed to do this.",
+          HTTP_STATUS.FORBIDDEN
+        )
+      );
+  };
 };

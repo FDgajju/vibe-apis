@@ -27,7 +27,7 @@ export const reactionCount = async (filter: AnyType) => {
 };
 
 export const createReactionService = async (
-  user: any,
+  user: AnyType,
   params: {
     post?: string;
     comment?: string;

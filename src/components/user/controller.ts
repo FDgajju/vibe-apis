@@ -1,12 +1,12 @@
 import { User } from "./model";
 import { getAll, getOne } from "../handlerFactory";
 import { AppError, filterData } from "../../utils";
-import type { ReqExtra } from "../../types/globalTypes";
+import type { AnyType, ReqExtra } from "../../types/globalTypes";
 import type { NextFunction, Response } from "express";
-import { HTTP_STATUS } from "../../constants";
-import mongoose, { isValidObjectId, PopulateOptions } from "mongoose";
-import { MODEL_NAMES } from "../../constants";
+import { DEFAULT_PROFILE_IMAGE, HTTP_STATUS } from "../../constants";
+import { isValidObjectId } from "mongoose";
 import Connection from "../connections/model";
+import APIFeatures from "../../utils/apiFeatures";
 
 export const updateSelf = async (
   req: ReqExtra,
@@ -61,7 +61,7 @@ export const getUser = (req: ReqExtra, res: Response, next: NextFunction) => {
 export const getUserWithStats = async function (
   req: ReqExtra,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) {
   const { user, params } = req;
 
@@ -89,10 +89,10 @@ export const getUserWithStats = async function (
       by: user._id.toString(),
     });
 
-    (userDetails as any).isFollowing = !!connection;
+    (userDetails as AnyType).isFollowing = !!connection;
     // console.log(connection);
   } else {
-    (userDetails as any).isFollowing = false;
+    (userDetails as AnyType).isFollowing = false;
   }
 
   return res.status(HTTP_STATUS.OK).send({
@@ -100,5 +100,78 @@ export const getUserWithStats = async function (
     statusCode: HTTP_STATUS.OK,
     error: null,
     data: userDetails,
+  });
+};
+
+// admin action
+export const createUser = async (
+  req: ReqExtra,
+  res: Response,
+  _next: NextFunction
+) => {
+  const { body } = req;
+
+  const data = filterData.addFields(body, [
+    "fullName",
+    "userName",
+    "email",
+    "mobile",
+    "password",
+    "passwordConfirm",
+    "role",
+    "profileImage",
+  ]);
+
+  data.profileImage = DEFAULT_PROFILE_IMAGE;
+
+  const createdUser = await User.create(data);
+
+  return res.status(HTTP_STATUS.OK).send({
+    status: true,
+    statusCode: HTTP_STATUS.OK,
+    error: null,
+    data: createdUser,
+  });
+};
+
+export const getUsersForAdmin = async (
+  req: ReqExtra,
+  res: Response,
+  _next: NextFunction
+) => {
+  const { user, query } = req;
+
+
+  const filter = { role: { $ne: "USER" }, _id: { $ne: user._id } }
+
+  const features = new APIFeatures(
+    User.find(filter),
+    query
+  )
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const [users, docCount] = await Promise.all([
+    features.query.populate([{ path: "profileImage", select: "url type" }]),
+    User.countDocuments({...filter, ...features.filterPayload}),
+  ]);
+
+  const limit = Number(query.limit) || 10;
+  const currentPage = Number(query.page) || 1;
+  const totalPages = Math.ceil(docCount / limit);
+
+  res.status(HTTP_STATUS.OK).json({
+    status: true,
+    statusCode: HTTP_STATUS.OK,
+    error: null,
+    meta: {
+      limit,
+      currentPage,
+      totalPages,
+      result: docCount,
+    },
+    data: users,
   });
 };

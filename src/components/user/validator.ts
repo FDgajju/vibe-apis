@@ -1,3 +1,4 @@
+import { USER_ROLES } from "../../constants/constant";
 import { z } from "../../lib";
 
 export const userSchema = z.object({
@@ -22,6 +23,17 @@ export const userSchema = z.object({
         path: ["body"],
       }
     ),
+});
+
+export const createUserSchema = z.object({
+  body: z.object({
+    fullName: z.string().nonempty("Full name is required"),
+    userName: z.string().nonempty("username is required"),
+    email: z.email("Not a valid email").nonempty("email is required"),
+    mobile: z.string().min(10).max(10).optional(),
+    role: z.enum(Object.values(USER_ROLES) as [string, ...string[]]),
+    password: z.string().nonempty("username is required"),
+  }),
 });
 
 export const updateUserSchema = z.object({

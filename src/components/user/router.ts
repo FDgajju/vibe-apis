@@ -1,14 +1,15 @@
 import { Router } from "express";
 import {
+  createUser,
   getAllUsers,
-  getUser,
+  getUsersForAdmin,
   getUserWithStats,
   updateSelf,
 } from "./controller";
 import { inputValidation } from "../../middlewares";
-import { updateUserSchema, userSchema } from "./validator";
+import { createUserSchema, updateUserSchema } from "./validator";
 import { catchHandler } from "../../utils";
-import { authenticate } from "../../middlewares/auth";
+import { authenticate, authorization } from "../../middlewares/auth";
 
 const userRouter = Router();
 
@@ -20,6 +21,22 @@ userRouter.patch(
   catchHandler(authenticate),
   inputValidation(updateUserSchema),
   catchHandler(updateSelf)
+);
+
+// admin action
+userRouter.post(
+  "/admin/create-employee",
+  catchHandler(authenticate),
+  authorization("ADMIN"),
+  inputValidation(createUserSchema),
+  catchHandler(createUser)
+);
+
+userRouter.get(
+  "/admin/employees",
+  catchHandler(authenticate),
+  authorization("ADMIN"),
+  catchHandler(getUsersForAdmin)
 );
 
 export default userRouter;
