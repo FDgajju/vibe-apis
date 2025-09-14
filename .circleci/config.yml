@@ -107,14 +107,14 @@ workflows:
           filters:
             branches:
               only:
-                - development
+                - master
       - build-dev-gcp:
           requires:
             - install
           filters:
             branches:
               only:
-                - development
+                - master
       - deploy-dev-gcp:
           requires:
             - build-dev-gcp
