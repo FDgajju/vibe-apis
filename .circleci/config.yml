@@ -1,0 +1,120 @@
+version: 2.1
+
+commands:
+  install-dependencies:
+    description: |
+      Install dependencies
+    steps:
+      - run: npm install
+
+  dev-build-commands-nkv:
+    description: |
+      Create a staging build
+    steps:
+      - run: |
+          NODE_ENV=production CI=false 
+          npm build
+      - run: mkdir -p build && cp -r dist/* build && cp -r node_modules package.json build/
+
+  dev-deploy-commands-nkv:
+    description: |
+      Deploying to the staging AWS
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - SHA256:tjPZMvZb7wD5fjZvFTjDyLyr5Ff1pUo3pYmb5ongNfA
+      - run: |
+          echo "Deploying"
+          cd build && tar -cvzf 'vibe-api.tar' *
+          mkdir -p ~/.ssh
+          touch ~/.ssh/config
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+          scp -i fingerprints 'vibe-api.tar' admin@35.154.24.229:/home/admin/
+          echo "copied vibe-api.tar"
+          ssh -i fingerprints admin@35.154.24.229 'ls && mkdir -p data/services/vibe-api && tar -xvzf vibe-api.tar -C data/services/vibe-api/ && rm vibe-api.tar'
+          echo "create vibe-api dir and untar"
+          ssh -i fingerprints admin@35.154.24.229 'sh data/scripts/stop.sh 4180'
+          echo "stop already running process"
+          ssh -tt -i fingerprints admin@35.154.24.229 'cd data/services/vibe-api && forever start server.js'
+          echo "start new serve process"
+
+executors:
+  default:
+    description: |
+      Node Runtime Environment
+    docker:
+      - image: cimg/node:<<parameters.node>>
+    parameters:
+      node:
+        default: "20.13.1"
+        type: string
+
+jobs:
+  build-dev-gcp:
+    description: |
+      Build the production application, and stores the assets in artifacts
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - dev-build-commands-nkv
+      - store_artifacts:
+          path: ./artifacts
+      - persist_to_workspace:
+          paths:
+            - project
+          root: ~/
+
+  deploy-dev-gcp:
+    description: |
+      Build the production application, and stores the assets in artifacts
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - dev-deploy-commands-nkv
+
+  install:
+    description: |
+      Install dependencies
+    executor: default
+    parameters:
+      before_install:
+        default:
+          - checkout
+        description: |
+          Steps to be executed before restoring cache and running install. Default is to run 'checkout' command.
+        type: steps
+
+    steps:
+      - steps: <<parameters.before_install>>
+      - restore_cache:
+          key: v1-node-modules-{{ checksum "yarn.lock" }}
+      - install-dependencies
+      - persist_to_workspace:
+          paths:
+            - project
+          root: ~/
+      - save_cache:
+          key: v1-node-modules-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/project/node_modules
+
+workflows:
+  app-build:
+    jobs:
+      - install:
+          filters:
+            branches:
+              only:
+                - development
+      - build-dev-gcp:
+          requires:
+            - install
+          filters:
+            branches:
+              only:
+                - development
+      - deploy-dev-gcp:
+          requires:
+            - build-dev-gcp
