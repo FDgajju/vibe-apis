@@ -13,7 +13,7 @@ commands:
     steps:
       - run: |
           NODE_ENV=production CI=false 
-          npm build
+          npm run build
       - run: mkdir -p build && cp -r dist/* build && cp -r node_modules package.json build/
 
   dev-deploy-commands-nkv:
