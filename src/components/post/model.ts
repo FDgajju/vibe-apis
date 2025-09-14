@@ -55,7 +55,7 @@ postSchema.virtual("reaction_count", {
 });
 
 postSchema.virtual("comment_count", {
-  ref: MODEL_NAMES.REACTION,
+  ref: MODEL_NAMES.COMMENT,
   localField: "_id",
   foreignField: "post",
   count: true,

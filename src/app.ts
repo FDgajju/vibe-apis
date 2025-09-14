@@ -9,7 +9,7 @@ import { injectWSocket } from "./components/injectWSocket";
 const app: Application = express();
 export const httpServer = createServer(app);
 
-const io = new Server(httpServer, {
+export const io = new Server(httpServer, {
   cors: {
     origin: CORS_ALLOWED_ORIGINS,
     methods: ["GET", "POST"],

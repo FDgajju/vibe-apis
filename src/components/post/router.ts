@@ -2,7 +2,6 @@ import { Router } from "express";
 import {
   createPost,
   deletePost,
-  getAllPosts,
   getAllPostsAggregation,
   getPost,
   updatePost,
