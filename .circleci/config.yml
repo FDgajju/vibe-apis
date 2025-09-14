@@ -22,7 +22,7 @@ commands:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - $FINGERPRINT
+            - ${FINGERPRINT}
       - run: |
           echo "Deploying"
           cd build && tar -cvzf 'vibe-api.tar' *
