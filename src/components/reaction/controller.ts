@@ -58,6 +58,7 @@ export const createReactionWS = async (data: {
 
     io.to(post).emit("updateLikes", {
       postId: post,
+      user,
       newLikesCount: updatedPost.data?.reaction_count,
       isReacted: updatedPost.data?.isReacted,
     });

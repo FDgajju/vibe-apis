@@ -22,7 +22,7 @@ export const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME as string;
 export const R2_SIGNED_URL_EXPIRY_TIME = Number.parseInt(
   process.env.R2_SIGNED_URL_EXPIRY_TIME || "300"
 );
-export const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL as string;
+// export const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL as string;
 
 /*
     cors
@@ -37,3 +37,25 @@ export const CORS_ALLOWED_ORIGINS =
 export const JWT_SECRET = process.env.JWT_SECRET || "super-secret";
 
 export const DEFAULT_PROFILE_IMAGE = process.env.DEFAULT_PROFILE_IMAGE as string;
+
+export const checkEnv = () => {
+  const requiredEnv = [
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+    "R2_ACCOUNT_ID",
+    "R2_PUB_ACCOUNT_ID",
+    "R2_BUCKET_NAME",
+    // "R2_PUBLIC_URL",
+    "DEFAULT_PROFILE_IMAGE",
+    "DB_HOST",
+    "DB",
+  ];
+
+  for (const envVar of requiredEnv) {
+    if (!process.env[envVar]) {
+      throw new Error(`Missing required environment variable: ${envVar}`);
+    }
+  }
+};
+
+checkEnv()
