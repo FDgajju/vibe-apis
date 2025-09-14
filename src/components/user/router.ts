@@ -25,19 +25,13 @@ userRouter.patch(
 );
 
 // admin action
-userRouter.use(authorization(USER_ROLES.ADMIN));
+userRouter.use(catchHandler(authenticate), authorization(USER_ROLES.ADMIN));
 userRouter.post(
   "/admin/create-employee",
-  catchHandler(authenticate),
   inputValidation(createUserSchema),
   catchHandler(createUser)
 );
 
-
-userRouter.get(
-  "/admin/employees",
-  catchHandler(authenticate),
-  catchHandler(getUsersForAdmin)
-);
+userRouter.get("/admin/employees", catchHandler(getUsersForAdmin));
 
 export default userRouter;
