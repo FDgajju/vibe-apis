@@ -10,6 +10,7 @@ import { inputValidation } from "../../middlewares";
 import { createUserSchema, updateUserSchema } from "./validator";
 import { catchHandler } from "../../utils";
 import { authenticate, authorization } from "../../middlewares/auth";
+import { USER_ROLES } from "../../constants/constant";
 
 const userRouter = Router();
 
@@ -24,18 +25,18 @@ userRouter.patch(
 );
 
 // admin action
+userRouter.use(authorization(USER_ROLES.ADMIN));
 userRouter.post(
   "/admin/create-employee",
   catchHandler(authenticate),
-  authorization("ADMIN"),
   inputValidation(createUserSchema),
   catchHandler(createUser)
 );
 
+
 userRouter.get(
   "/admin/employees",
   catchHandler(authenticate),
-  authorization("ADMIN"),
   catchHandler(getUsersForAdmin)
 );
 
